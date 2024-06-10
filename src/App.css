@@ -1,0 +1,51 @@
+.game-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.winner {
+  color: white;
+}
+
+.board {
+  display: grid;
+  margin: 3rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+  height: min(70vw, 70vh, 500px);
+  width: min(70vw, 70vh, 500px);
+  background-color: hsl(0, 0%, 90%);
+}
+
+.cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+.cell img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.cell .x {
+  object-position: 100% 0;
+}
+
+.cell .o {
+  object-position: 0 0;
+}
+
+@media screen and (max-width: 720px) {
+  .board {
+    height: min(90vw, 80vh, 600px);
+    width: min(90vw, 80vh, 600px);
+  }
+}
