@@ -4,21 +4,21 @@ jobs:
   run-jest-tests:
     runs-on: ${{ matrix.os }}
     strategy:
-        matrix:
-            os: [ubuntu-latest, windows-latest, macos-latest]
-            node-version: [20.x]
-      steps:
-        - uses: actions/checkout@v4
-        - name: Install pnpm
-          uses: pnpm/action-setup@v4
-          with:
-            version: 9
-        - name: Use Node.js ${{ matrix.node-version }}
-          uses: actions/setup-node@v4
-          with:
-            node-version: ${{ matrix.version }}
-            cache: 'pnpm'
-        - name: Install dependencies
-          run: pnpm install 
-        - name: Run tests
-          run: pnpm run test
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        node-version: [20.x]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "pnpm"
+      - name: Install dependencies
+        run: pnpm install
+      - name: Run tests
+        run: pnpm run test
