@@ -20,6 +20,8 @@ export default class Game {
     ["bottomLeft", "bottomCenter", "bottomRight"],
   ] as const;
 
+  private winner: Player | null = null;
+
   private gameState: GameState;
 
   private nextPlayer: Player;
@@ -57,11 +59,12 @@ export default class Game {
   }
 
   reset() {
+    this.winner = null;
+    this.nextPlayer = "x";
+    this.lastPosition = "middleCenter";
     this.gameState = Object.fromEntries(
       Game.POS_MTX.flat().map((key) => [key, null])
     ) as GameState;
-    this.nextPlayer = "x";
-    this.lastPosition = "middleCenter";
     this.notify();
   }
 
@@ -74,9 +77,7 @@ export default class Game {
   }
 
   play(position: Position) {
-    console.log("play", position);
-
-    if (this.gameState[position]) {
+    if (this.gameState[position] || this.winner) {
       return;
     }
 
@@ -97,6 +98,7 @@ export default class Game {
       }
 
       if (i === 2) {
+        this.winner = lastPlayer;
         return lastPlayer;
       }
     }
@@ -108,6 +110,7 @@ export default class Game {
       }
 
       if (i === 2) {
+        this.winner = lastPlayer;
         return lastPlayer;
       }
     }
@@ -120,6 +123,7 @@ export default class Game {
         }
 
         if (i === 2) {
+          this.winner = lastPlayer;
           return lastPlayer;
         }
       }
@@ -133,6 +137,7 @@ export default class Game {
         }
 
         if (i === 2) {
+          this.winner = lastPlayer;
           return lastPlayer;
         }
       }
